@@ -16,7 +16,15 @@
 package com.regitail;
 
 import com.github.snksoft.crc.CRC;
+import com.regitail.exceptions.NegativeAmountException;
+import com.regitail.exceptions.TargetMismatchException;
+import net.glxn.qrgen.core.image.ImageType;
+import net.glxn.qrgen.javase.QRCode;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,6 +53,7 @@ public class PromptPayEMVCoGenerator {
     private final String C_CITIZEN = "02";
     private final String C_TELEPHONE = "01";
     private final String C_PHONE_PREFIX = "0066";
+    private final int C_QR_IMAGE_DEFAULT_SIZE = 250;
 
     private final CRC crcGenertor = new CRC(CRC.Parameters.CCITT);
 
@@ -95,6 +104,29 @@ public class PromptPayEMVCoGenerator {
         emvco += checksum;
 
         return emvco;
+    }
+
+    public File generateQRCode (String filename, ImageType imageType) {
+        return this.generateQRCode(filename, imageType, this.C_QR_IMAGE_DEFAULT_SIZE);
+    }
+
+    public File generateQRCode (String filename, ImageType imageType, int imageSize) {
+        String emvco = this.generate();
+        ImageType iType = ImageType.PNG;
+
+        if (imageType != null) {
+            iType = imageType;
+        }
+
+        File f = QRCode.from(emvco).withSize(imageSize, imageSize).to(iType).file();
+        try {
+            Files.copy(f.toPath(), Paths.get(filename), StandardCopyOption.REPLACE_EXISTING);
+            f = new File(filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return f;
     }
 
     /**

@@ -1,7 +1,13 @@
 package com.regitail;
 
+import com.regitail.exceptions.NegativeAmountException;
+import com.regitail.exceptions.TargetMismatchException;
+import net.glxn.qrgen.core.image.ImageType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -82,5 +88,25 @@ class PromptPayEMVCoGeneratorTest {
             PromptPayEMVCoGenerator promptpay = new PromptPayEMVCoGenerator(target, amount);
             assertEquals(expected, promptpay.generate());
         });
+    }
+
+    @DisplayName("Test generate QR code")
+    @Test
+    void generateQRCode() {
+        String target = "0812345678";
+        Double amount = 50.23D;
+        String expected = "00020101021229370016A000000677010111011300668123456785802TH5303764540550.236304FCDA";
+        String filename = "qr.png";
+
+        try {
+            PromptPayEMVCoGenerator promptpay = new PromptPayEMVCoGenerator(target, amount);
+            File f = promptpay.generateQRCode(filename, ImageType.PNG);
+            assertNotNull(f);
+            assertThat(f).canRead();
+        } catch (TargetMismatchException ex) {
+            ex.printStackTrace();
+        } catch (NegativeAmountException ex) {
+            ex.printStackTrace();
+        }
     }
 }

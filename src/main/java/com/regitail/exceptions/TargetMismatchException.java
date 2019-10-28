@@ -1,4 +1,4 @@
-package com.regitail;
+package com.regitail.exceptions;
 
 public class TargetMismatchException extends Exception {
 }
