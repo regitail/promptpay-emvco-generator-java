@@ -64,6 +64,7 @@ public class PromptPayEMVCoGenerator {
      * @param target target account
      * @param amount money to transfer
      * @throws TargetMismatchException is will be throw when target account format is mismatched
+     * @throws NegativeAmountException will be throw when amount is a negative value
      */
     public PromptPayEMVCoGenerator (String target, Double amount) throws TargetMismatchException, NegativeAmountException {
         this.accountType = this.accountTypeCheck(target);
@@ -106,10 +107,23 @@ public class PromptPayEMVCoGenerator {
         return emvco;
     }
 
+    /**
+     * PromptPay QR Code Generator
+     * @param filename QR code image file name
+     * @param imageType Image type see: net.glxn.qrgen.core.image.ImageType
+     * @return File QR code image file
+     */
     public File generateQRCode (String filename, ImageType imageType) {
         return this.generateQRCode(filename, imageType, this.C_QR_IMAGE_DEFAULT_SIZE);
     }
 
+    /**
+     * PromptPay QR Code Generator
+     * @param filename QR code image file name
+     * @param imageType Image type see: net.glxn.qrgen.core.image.ImageType
+     * @param imageSize Image size in pixel
+     * @return File QR code image file
+     */
     public File generateQRCode (String filename, ImageType imageType, int imageSize) {
         String emvco = this.generate();
         ImageType iType = ImageType.PNG;
