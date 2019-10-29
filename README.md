@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/regitail/promptpay-emvco-generator-java/workflows/Java%20CI/badge.svg)](https://github.com/regitail/promptpay-emvco-generator-java/actions)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/regitail/promptpay-emvco-generator-java/master/LICENSE) [![Actions Status](https://github.com/regitail/promptpay-emvco-generator-java/workflows/Java%20CI/badge.svg)](https://github.com/regitail/promptpay-emvco-generator-java/actions)
 ### PromptPay Generator for Java and JVM languages
 
 #### Dependencies:
@@ -10,21 +10,21 @@ java-crc: https://github.com/snksoft/java-crc
 
 Maven:
 ```xml
-    <dependencies>
-        <dependency>
-            <groupId>com.regitail</groupId>
-            <artifactId>promptpay-emvco-generator</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-    </dependencies>
+<dependencies>
+    <dependency>
+        <groupId>com.regitail</groupId>
+        <artifactId>promptpay-emvco-generator</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+</dependencies>
 ```
 
 Gradle:
 
 ```gradle
-    dependencies {
-        compile 'com.regitail:promptpay-emvco-generator:1.0.0'
-    }
+dependencies {
+    compile 'com.regitail:promptpay-emvco-generator:1.0.0'
+}
 ```
 
 Java file:

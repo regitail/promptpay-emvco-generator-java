@@ -7,6 +7,19 @@
     <groupId>com.regitail</groupId>
     <artifactId>promptpay-emvco-generator</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>PromptPay EMVCo Generator</name>
+    <description>Thailand's PromptPay EMVCo QR Generator</description>
+    <url>https://github.com/regitail/promptpay-emvco-generator-java</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://raw.githubusercontent.com/regitail/promptpay-emvco-generator-java/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <dependencies>
         <dependency>
